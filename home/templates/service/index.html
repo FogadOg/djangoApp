@@ -1,0 +1,578 @@
+<!--  -->
+
+
+
+
+
+
+
+
+
+{%extends "service/base.html"%}
+
+{%block title%}Home{%endblock%}
+{%block content%}
+<nav class="sidebar">
+  <div class="sidebarButtonContainer">
+    <button id="hideSidebar" class="sidebarToggler">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+      </svg>
+    </button>
+
+  </div>
+
+    <div class="log">
+        <div class="logDayContainer">
+            <div class="logContainer">
+
+              {%for workout in workouts%}
+                <div class="exercise"><a href="{% url 'workout page' workout.workoutName %}">{{workout.workoutName}}</a></div>
+              {%endfor%}
+              
+
+            </div>
+
+        </div>
+    </div>
+
+  
+
+  <div class="modal fade" id="deleteAccountModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <a type="button" class="btn btn-secondary" href="{% url 'delete user' %}">Delete Account</a>
+          <button type="button" class="btn btn-primary"  class="close" data-dismiss="modal" aria-label="Close">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="btn-group dropup accountContainer">
+    <button type="button" class="settingsPanalToggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      
+      <div class="accountName"><p>{{username}}</p></div>
+      
+      <span class="accountSettingsIcon">
+          <svg xmlns="http://www.w3.org/2000/svg"  width="25" height="25" fill="#333" class="bi bi-three-dots" viewBox="0 0 16 16">
+              <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+            </svg>
+      </span>
+    </button>
+    <div class="dropdown-menu">
+      <div class="settingsButtonContainer">
+        <a href="{% url 'logout' %}">
+          <button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+              <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+            </svg>
+            Logout
+    
+          </button>
+  
+        </a>
+        <button data-toggle="modal" data-target="#deleteAccountModel">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+          </svg>
+          Delete Account
+  
+        </button>
+      </div>
+    </div>
+  </div>
+
+</nav>
+
+
+<div class="mainScreen">  
+  <div class="mainScreenContainer">
+    <div class="mainScreenTop">
+      <div class="mainContainerHeader">
+        <h1 class="title">Progress</h1>
+        <div class="mainContainerHeaderButtonContainer">
+          <button id="showSidebar" class="sidebarToggler">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-layout-sidebar" viewBox="0 0 16 16">
+              <path d="M0 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm5-1v12h9a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H5zM4 2H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h2V2z"/>
+            </svg>
+          </button>
+
+        </div>
+
+      </div>
+      <div class="mainScreenContent">
+        <div class="graphContainer">
+          <div>
+            <div class="graph">
+          
+            </div>
+      
+          </div>
+          <section class="graphButtonContainer">
+            <button onclick="updateDataWeek()">Week</button>
+            <button onclick="updateDataMonth()">Month</button>
+            <button onclick="updateDataYear()">Year</button>
+          </section>
+      
+          
+        </div>
+  
+        <div class="setContainer">
+          <div class="box">
+            <div class="setData setTitle">
+              <div class="setInfo">
+                <p>Set</p>
+              </div>
+              <div class="setInfo">
+                <p>weight(Kg)</p>
+              </div>
+              <div class="setInfo">
+                <p>Reps</p>
+              </div>
+            </div>
+            <div class="sets" id="setDisplay">
+              {%for workout in workoutData%}
+                <div class="setData">
+                  <div class="setInfo">
+                    <p>{{ forloop.counter }}</p>
+                  </div>
+                  <div class="setInfo">
+                    <p>{{workout.wight}}</p>
+                  </div>
+                  <div class="setInfo">
+                    <p>{{workout.reps}}</p>
+                  </div>
+                  <div class="deleteSetButtonContainer">
+                    <a href="{% url 'delete set' workout.id %}">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+
+              {%endfor%}
+  
+  
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="mainScreenBottom">
+      <div class="mainScreenBottomLeft">
+        <div class="mainScreenBottomLeftContainer">
+          <h1>Days In Gym</h1>
+          <div class="gymTimeTracker">
+            <div class="gymTimeTrackerText">
+              <p id="daysInGym">423</p>
+  
+            </div>
+          </div>
+
+        </div>
+        
+      </div>
+      <div class="mainScreenBottomRight">
+        
+      </div>
+    </div>
+    <div class="speedDial">
+      <form method="POST" class="hiddenForm" id="form1">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary w-100 p-3 mt-3">Submit</button>
+        
+      </form>
+      <button class="speedDialButton" id="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+      </button>
+    </div>
+    
+  </div>
+  
+  <!-- <a href="{% url 'logout' %}">Logout</a> -->
+
+  
+  <script defer>
+    const showSidebar = document.getElementById('showSidebar');
+    const hideSidebar = document.getElementById('hideSidebar');
+    const sidebar = document.querySelector('.sidebar');
+    
+    function togglSidebar(){
+        const sidebarHidden = sidebar.style.left === '-50rem';
+
+        if (sidebarHidden) {
+          sidebar.style.left = '0rem';
+        } else {
+          sidebar.style.left = '-50rem';
+        }
+
+    }
+
+    showSidebar.addEventListener('click', () => {togglSidebar()});
+    hideSidebar.addEventListener('click', () => {togglSidebar()});
+  </script>
+
+  <script>
+    const speedDialButtons = document.querySelectorAll(".speedDialButton");
+    const forms = document.querySelectorAll(".hiddenForm");
+
+    speedDialButtons.forEach((button, index) => {
+        button.addEventListener("click", (event) => {
+            // Hide all forms initially
+            forms.forEach((form) => {
+                form.style.display = "none";
+            });
+
+            // Show the corresponding form when a button is clicked
+            forms[index].style.display = "block";
+
+            // Prevent the click event from propagating to the document
+            event.stopPropagation();
+        });
+    });
+
+    // Add a click event listener to the document
+    document.addEventListener("click", () => {
+        // Hide all forms when you click outside
+        forms.forEach((form) => {
+            form.style.display = "none";
+        });
+    });
+
+    // Add a click event listener to the forms to prevent propagation
+    forms.forEach((form) => {
+        form.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
+    });
+
+
+  </script>
+  
+  <script>
+
+    const stratTimeSpan=7
+
+    function getweightData(){
+      var workoutDataweight="{{workoutDataWight}}"
+      workoutDataweight=JSON.parse(workoutDataweight)
+  
+      return workoutDataweight
+
+    }
+    let weights=getweightData()
+
+    function getRepData(){
+      var workoutDataReps="{{workoutDataReps}}"
+      workoutDataReps=JSON.parse(workoutDataReps)
+  
+      return workoutDataReps
+
+    }
+    let reps=getRepData()
+
+    function getDateData(){
+      var workoutDataDate = "{{workoutDataDate}}"
+  
+      jsonString = workoutDataDate.replace(/&#x27;/g, "'");
+      jsonString = jsonString.replace(/&#x22;/g, '"');
+  
+      jsonString = jsonString.replace(/'/g, '"');
+  
+  
+      var jsonArray = JSON.parse(jsonString);
+  
+      return jsonArray
+
+    }
+    let dateOfSet=getDateData()
+
+    function generateDataset(weights,reps){
+      var i = 0;
+      let dataset=[]
+      while (i < weights.length) {
+        const volume=parseInt(weights[i])*parseInt(reps[i])
+        dataset.push({x:i, y:volume})
+        i++;
+      }
+      return dataset
+    }
+
+
+
+
+
+    class DaysOfMonth{
+      daysInMonth (month, year) {
+        return new Date(year, month, 0).getDate();
+      }
+
+      getNumberOfDays(date){
+        let currentDate = new Date().toJSON().slice(0, 10);
+        currentDate=currentDate.split("-")
+
+
+        let currentYear=currentDate[0]
+        let currentMonth=currentDate[1]
+        return this.daysInMonth(currentMonth, currentYear)
+      }
+
+    }
+
+    const daysOfMonth=new DaysOfMonth()
+
+
+    class Data{
+      constructor(dateOfSet, reps, weights){
+        this.dateOfSet=dateOfSet
+        this.reps=reps
+        this.weights=weights
+        this.reformatedData=this.reformatData(this.dateOfSet,this.reps,this.weights)
+        
+      }
+
+      reformatData(displayInHtml=false){
+        if (this.dateOfSet.length !== this.reps.length || this.dateOfSet.length !== this.weights.length) {
+          throw new Error('Input arrays must have the same length');
+        }
+
+        var reformattedData = [];
+
+
+        if(displayInHtml==true){
+          for (let i = 0; i < dateOfSet.length; i++) {
+            reformattedData.push({ timestamp: this.dateOfSet[i], weight:this.weights[i], reps: this.reps[i] });
+          }
+
+        }else{
+          for (let i = 0; i < dateOfSet.length; i++) {
+            reformattedData.push({ timestamp: this.dateOfSet[i], volume: this.reps[i] * this.weights[i] });
+          }
+
+        }
+
+        return reformattedData;
+      }
+
+      getDatesVolume(days=365){
+        let dataFromThePastXDays=this.getDataFromThePastXDays(days,this.reformatedData)
+
+        return dataFromThePastXDays
+      }
+ 
+      getDataFromThePastXDays(days,data,raw=false){
+        const groupedData=this.groupDataOnDate()
+
+        const sixDaysAgo = new Date();
+        sixDaysAgo.setDate(sixDaysAgo.getDate() - days);
+
+        // Filter the data array
+        const filteredData = groupedData.filter(item => {
+          const itemTimestamp = new Date(item.timestamp);
+          return itemTimestamp >= sixDaysAgo;
+        });
+        
+        if(raw==true){
+          return filteredData
+        }else{
+          return this.reformatDataToD3Data(filteredData)
+        }
+
+      }
+
+      groupDataOnDate(){        
+        const groupedData = {};
+
+        this.reformatedData.forEach(item => {
+          const date = item.timestamp.split('T')[0]; // Extract the date part
+          if (groupedData[date]) {
+            groupedData[date] += item.volume;
+          } else {
+            groupedData[date] = item.volume;
+          }
+        });
+
+        const groupedArray = [];
+
+        for (const date in groupedData) {
+          groupedArray.push({ timestamp: date, volume: groupedData[date] });
+          
+        }
+        return groupedArray
+      }
+
+      reformatDataToD3Data(data){
+       
+        const groupedData = {};
+        let x = 0;
+
+        data.forEach(item => {
+          if (groupedData[item.timestamp]) {
+            groupedData[item.timestamp].push(item.volume);
+          } else {
+            groupedData[item.timestamp] = [item.volume];
+          }
+        });
+
+        const groupedArray = [];
+
+        for (const timestamp in groupedData) {
+          groupedData[timestamp].forEach(y => {
+            groupedArray.push({ x, y: y });
+            x++; 
+          });
+        }
+
+
+        return groupedArray;
+      }
+
+    }
+
+    const dataClass=new Data(dateOfSet, reps, weights)
+
+
+
+
+    let data
+    updateAccordingToData(stratTimeSpan)
+
+
+    let margin = { top: 20, right: 20, bottom: 50, left: 50 };
+    let svgWidth, svgHeight;
+
+    const phone = window.matchMedia('(min-width: 1024px)');
+    function handleTabletChange(e) {
+      if (e.matches) {
+        svgWidth = 700 - margin.left - margin.right;
+        svgHeight = 500 - margin.top - margin.bottom;
+      } else {
+        svgWidth = 250 - margin.left - margin.right;
+        svgHeight = 200 - margin.top - margin.bottom;
+      }
+    }
+    phone.addListener(handleTabletChange);
+
+    handleTabletChange(phone)
+
+
+      
+
+
+      
+
+
+
+      
+    
+
+    let xScale = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.x)])
+        .range([0, svgWidth]);
+
+    let yScale = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.y)])
+        .range([svgHeight, 0]);
+
+    const svg = d3.select(".graph").append("svg")
+        .attr("width", svgWidth + margin.left + margin.right)
+        .attr("height", svgHeight + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+
+    function updateAccordingToData(days){
+      document.getElementById("daysInGym").innerText=(dataClass.getDataFromThePastXDays(days,dataClass.reformatedData,true)).length
+      data=dataClass.getDatesVolume(days)
+      dataClass.reformatData(true).filter(item => {
+      });
+    }
+
+
+    function updateDataWeek() {
+      updateAccordingToData(7)
+
+      redrawGraph();
+    }
+    function updateDataMonth() {
+      const daysInCurrentMonth=daysOfMonth.getNumberOfDays()
+
+      updateAccordingToData(daysInCurrentMonth)
+      redrawGraph();
+    }
+    function updateDataYear() {
+      updateAccordingToData(365)
+      
+      redrawGraph();
+    }
+
+    function redrawGraph() {
+      // Create a line generator
+      let xScale = d3.scaleLinear()
+          .domain([0, d3.max(data, d => d.x)])
+          .range([0, svgWidth]);
+
+      let yScale = d3.scaleLinear()
+          .domain([0, d3.max(data, d => d.y)])
+          .range([svgHeight, 0]);
+
+      const line = d3.line()
+          .x(d => xScale(d.x))
+          .y(d => yScale(d.y));
+
+      // Remove previous graph with animation
+      svg.selectAll("path")
+          .transition()
+          .duration(1000) // Animation duration in milliseconds
+          .attr("d", "M 0 0 L 0 0") // Animation effect (e.g., move to point 0,0)
+
+      // // Add x-axis with custom tick values
+      // svg.append("g")
+      //     .attr("transform", `translate(0, ${svgHeight})`)
+      //     .call(
+      //         d3.axisBottom(xScale)
+      //             .tickValues([0, 10, 20, 30, 40, 50, 60, 70, 80, 90,100, 110, 120, 130, 140, 150, 160])
+      //     );
+
+      // // Add y-axis with custom tick values
+      // svg.append("g")
+      //     .call(
+      //         d3.axisLeft(yScale)
+      //             .tickValues([0, 10, 20, 30, 40, 50, 60, 70, 80, 90,100, 110, 120, 130, 140, 150, 160])
+      //     );
+
+      // Redraw the graph with updated data and animation
+      svg.append("path")
+          .datum(data)
+          .attr("fill", "none")
+          .attr("stroke", "#080E1F")
+          .attr("stroke-width", 3)
+          .attr("d", line)
+          .attr("stroke-dasharray", svgWidth)
+          .attr("stroke-dashoffset", svgWidth)
+          .transition()
+          .duration(1000) // Animation duration in milliseconds
+          .attr("stroke-dashoffset", 0); // Animation effect (e.g., reveal the line)
+  }
+
+  redrawGraph();
+  </script>
+</div>
+{%endblock%}
+
+
+
+
+

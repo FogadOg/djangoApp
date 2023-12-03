@@ -1,0 +1,19 @@
+body{
+    overflow-x: hidden;
+}
+
+@media (min-width:1024px){
+    body{
+        overflow-y: hidden;
+    }
+}
+path{
+    transition: 100ms;
+}
+:root{
+    --navyBlue:#080E1F;
+    --darkGray:#333441;
+}
+a {
+  text-decoration: none;
+}

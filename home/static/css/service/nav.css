@@ -1,0 +1,122 @@
+nav{
+    display: block;
+    padding: 3rem 0;
+    background-color: var(--navyBlue);
+}
+.log{
+    height: 65%;
+    overflow-y: scroll;
+}
+
+.logDayContainer{
+    color: white;
+}
+.logContainer{
+    padding-left: 1rem;
+}
+
+
+.exercise{
+    padding: 1rem 1rem 1rem 3rem;
+    font-size: 2.2rem;
+    font-weight: 800;
+}
+.exercise:hover{
+    background-color: #040811;
+}
+.exercise a{
+    color: white;
+
+}
+.exercise a:hover{
+    color: white;
+    text-decoration: none;
+
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: lightgrey; 
+    border-radius: 10px;
+}
+
+.accountContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebarButtonContainer{
+    display: flex;
+    justify-content: right;
+    padding-right: 3rem;
+}
+
+.sidebarToggler{
+    display: none;
+    padding: .7rem;
+    border: none;
+    border-radius: 10px;
+}
+@media (min-width:1024px){
+
+    .log{
+        height: 80%;
+    }
+}
+@media (max-width:425px){
+    .sidebar{
+        width: 100vw;
+        height: 100vh;
+        z-index: 5;
+        transition: left 600ms;
+        position: fixed;
+        left: -50rem;
+    }
+    .sidebarToggler{
+        display: block;
+    }
+}
+.settingsButtonContainer{
+    background-color: white;
+    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+}
+.settingsButtonContainer button{
+    border: none;
+    padding: .5rem 1rem;
+    border-radius: .7rem;
+}
+.dropup .dropdown-toggle::after{
+    all: unset;
+}
+.accountName p{
+    all: unset;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #333;
+}
+.accountName{
+    margin-right: 25%;
+
+}
+.settingsPanalToggle{
+    width: 80%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .4rem 0;
+    border-radius: 1rem;
+
+
+}

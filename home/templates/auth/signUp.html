@@ -1,0 +1,56 @@
+
+
+{%extends "base.html"%}
+
+{%block title%}Sign Up{%endblock%}
+{%block content%}
+<div class="formBox">
+    <form method="post">
+        
+    {% load widget_tweaks %}
+    {%csrf_token%}
+
+    <div class="signUpTitle">
+        <h1>Welcome</h1>
+
+    </div>
+    
+       {{form.as_p}}
+    <button type="submit" class="btn btn-primary w-100 p-3 mt-3">Sign Up</button>
+    <p>already have a account <a href="{% url 'login' %}">Log in</a></p>
+        
+
+    </form>
+
+</div>
+
+<!-- 
+<div class="formBox">
+    <form method="post">
+        {%csrf_token%}
+        <p>
+            <input class="form-control form-control-lg mt-3" id="colFormLabelLg" type="text" name="username" value="fogad1" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username" placeholder="Username">
+        </p>
+
+       
+        <p>
+            <input class="form-control form-control-lg mt-3" id="colFormLabelLg" type="password" name="password1" autocomplete="new-password" required="" id="id_password1" placeholder="Password">
+        </p>
+
+        <span class="helptext"></span></p>
+
+        <p></p>
+        
+        <p>
+            <input class="form-control form-control-lg mt-3" id="colFormLabelLg" type="password" name="password2" autocomplete="new-password" required="" id="id_password2" placeholder="Password Confirmation">
+        </p>
+        
+        
+        <button type="submit" class="btn btn-primary w-100 p-3 mt-3">Sign Up</button>
+
+    </form>
+
+</div> -->
+{%endblock%}
+
+
